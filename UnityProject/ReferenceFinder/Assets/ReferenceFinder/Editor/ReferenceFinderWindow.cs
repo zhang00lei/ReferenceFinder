@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.IMGUI.Controls;
-using Object = UnityEngine.Object;
 
 public class ReferenceFinderWindow : EditorWindow
 {
@@ -214,9 +212,12 @@ public class ReferenceFinderWindow : EditorWindow
             }
         }
 
-        if (GUILayout.Button("删除无引用物体", toolbarButtonGUIStyle))
+        if (GUILayout.Button("RemoveUnusedAsset", toolbarButtonGUIStyle))
         {
-            RemoveAllUnusedAsset();
+            if (EditorUtility.DisplayDialog("提示", "此操作将会删除所有无引用的资源", "确定", "取消"))
+            {
+                RemoveAllUnusedAsset();
+            }
         }
 
         EditorGUILayout.EndHorizontal();
